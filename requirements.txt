@@ -5,7 +5,6 @@ matplotlib
 seaborn
 scikit-learn
 ultralytics
-opencv-python-headless
 openai
 koreanize-matplotlib
 plotly
