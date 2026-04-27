@@ -10,3 +10,5 @@ koreanize-matplotlib
 plotly
 tensorflow
 h5py
+langchain
+langchain-openai
