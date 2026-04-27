@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, time as dt_time
 import os
 import time
-import tensorflow as tf
+
 
 # 외부 서비스 모듈 임포트 (가정)
 from openai_service import generate_anomaly_report
@@ -81,9 +81,6 @@ if 'scenario_idx' not in st.session_state:
 
 @st.cache_resource
 def load_anomaly_model():
-    model_path = 'hybrid_model.h5'
-    if os.path.exists(model_path):
-        return tf.keras.models.load_model(model_path, compile=False)
     return None
 
 @st.cache_data
@@ -347,17 +344,7 @@ for proc in processes:
 
             if is_err:
                 process_statuses[proc] = "이상"
-                if name == "pH":
-                    model_score = 0.0
-                    if hybrid_model is not None:
-                        dummy_sequence = np.random.normal(0, 1, (1, 20, 15))
-                        recon_pred, forecast_pred = hybrid_model.predict(dummy_sequence, verbose=0)
-                        ae_score = np.mean(np.square(recon_pred[:, -1, :] - dummy_sequence[:, -1, :]), axis=1)[0]
-                        fc_score = np.mean(np.square(forecast_pred - dummy_sequence[:, -1, :]), axis=1)[0]
-                        model_score = (ae_score * 0.5) + (fc_score * 0.5)
-                    active_alarms.append(f"{proc} {name} 이상 ({val:.2f}) | Model Score: {model_score:.4f}")
-                else:
-                    active_alarms.append(f"{proc} {name} 이상 ({val:.2f})")
+                active_alarms.append(f"{proc} {name} 이상 ({val:.2f})")
 
             current_sensor_values[proc][name] = {"val": val, "is_err": is_err}
             continue
