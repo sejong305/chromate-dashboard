@@ -5,13 +5,7 @@ matplotlib
 seaborn
 scikit-learn
 ultralytics
+opencv-python-headless
 openai
 koreanize-matplotlib
 plotly
-tensorflow
-h5py
-langchain
-langchain-openai
-langchain-community
-langchain-core
-langgraph
