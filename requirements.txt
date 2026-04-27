@@ -10,3 +10,4 @@ openai
 koreanize-matplotlib
 plotly
 tensorflow
+h5py
