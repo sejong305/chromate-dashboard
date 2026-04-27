@@ -12,3 +12,6 @@ tensorflow
 h5py
 langchain
 langchain-openai
+langchain-community
+langchain-core
+langgraph
